@@ -20,6 +20,12 @@ This is a **Task Management** web application built with [Next.js](https://nextj
 - [Tailwind CSS](https://tailwindcss.com)
 - [ESLint](https://eslint.org) for code quality
 
+## Backend Server
+
+This project uses a Node.js and Express-based REST API server for backend functionality.  
+You can find the server source code and setup instructions here:  
+[https://github.com/omarFaruk99/task-management-server](https://github.com/omarFaruk99/task-management-server)
+
 ## Setup Procedure
 
 To set up the project after cloning from GitHub:
