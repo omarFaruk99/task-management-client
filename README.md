@@ -1,97 +1,107 @@
-# Task Manager – Full Stack React Assessment
+# Task Manager — Full Stack React Assessment
 
-This is a **Task Management** web application built with [Next.js](https://nextjs.org), React, and Axios. It is designed as a full stack developer assessment project, focusing on modern best practices for building scalable, maintainable, and user-friendly task management solutions.
+A professional, production-oriented Task Management web client built with Next.js, React and Axios. This repository demonstrates modern practices for building a maintainable, testable and secure single-page application that consumes a REST API backend.
+
+Key points
+
+- Clean component structure and context-based auth
+- Axios service layer with interceptors for auth and error handling
+- Tailwind CSS for responsive UI
+- Focus on developer experience and clarity
 
 ## Features
 
-- **Authentication**: Secure login and registration flows.
-- **Dashboard**: Overview of tasks, quick actions, and user stats.
-- **Task Management**: Create, update, delete, and filter tasks.
-- **User Profiles**: View and edit user information.
-- **Role-based Access**: Protected routes for authenticated users.
-- **Responsive UI**: Built with Tailwind CSS for mobile and desktop.
-- **API Integration**: Axios-based service layer for RESTful backend communication.
+- Authentication: login and registration flows with token persistence
+- Dashboard: create, filter, edit and delete tasks
+- User profile: view and update user details
+- Role-based access to protected routes
+- Responsive design with Tailwind CSS
+- Organized API layer and React contexts for state management
 
-## Technologies Used
+## Technologies
 
-- [Next.js](https://nextjs.org) (App Router, SSR/CSR)
-- [React](https://react.dev)
-- [Axios](https://axios-http.com)
-- [Tailwind CSS](https://tailwindcss.com)
-- [ESLint](https://eslint.org) for code quality
+- Next.js (App Router)
+- React
+- Axios
+- Tailwind CSS
+- ESLint
 
-## Backend Server
+## Backend
 
-This project uses a Node.js and Express-based REST API server for backend functionality.  
-You can find the server source code and setup instructions here:  
-[https://github.com/omarFaruk99/task-management-server](https://github.com/omarFaruk99/task-management-server)
+The server is a separate Node/Express repository:
+https://github.com/omarFaruk99/task-management-server
 
-## Setup Procedure
+## Quick start
 
-To set up the project after cloning from GitHub:
-
-1. **Clone the repository:**
-
+1. Clone and install
    ```bash
    git clone https://github.com/your-username/task-management-client.git
    cd task-management-client
-   ```
-
-2. **Install dependencies:**
-
-   ```bash
    npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   # or
-   bun install
    ```
-
-3. **Configure environment variables:**
-
-   - Create a `.env.local` file in the project root.
-   - Add your API base URL:
+2. Configure environment
+   - Create `.env.local` and set:
      ```
      NEXT_PUBLIC_API_BASE_URL=http://localhost:5000/api
      ```
-   - For production, set this variable to your production API endpoint.
-
-4. **Run the development server:**
-
+3. Run development server
    ```bash
    npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   # or
-   bun dev
    ```
+4. Open http://localhost:3000
 
-5. **Access the app:**
-   - Open [http://localhost:3000](http://localhost:3000) in your browser.
+## Routes (Frontend)
 
-## Project Structure
+Below are the primary frontend routes, the files that implement them and short notes about behavior and protection.
 
-- `app/` – Next.js pages and layouts
-- `components/` – Reusable UI and logic components
-- `services/` – API service layer ([services/api.js](services/api.js))
-- `contexts/` – React context providers
-- `public/` – Static assets
+- `/` — Home / Landing  
+  File: app/page.js  
+  Public landing page with links to authentication and dashboard.
 
-## Environment Variables
+- `/auth/login` — Login  
+  File: app/auth/login/page.js  
+  Authentication form; on success stores token via AuthContext.
 
-The API base URL is managed via environment variables for flexibility across development and production environments.  
-Set `NEXT_PUBLIC_API_BASE_URL` in `.env.local` for local development, and configure it in your deployment platform for production.
+- `/auth/register` — Register  
+  File: app/auth/register/page.js  
+  Registration form that creates a new account and signs in.
 
-## Customization
+- `/dashboard` — Dashboard (protected)  
+  File: app/dashboard/page.js  
+  Protected route (requires authentication). Renders task list and management UI (TaskList, TaskForm).
 
-You can start editing the main page by modifying [`app/page.js`](app/page.js). The app supports hot-reloading for rapid development.
+- `/profile` — Profile (protected)  
+  File: app/profile/page.js  
+  Protected user profile page that displays and allows editing of profile data.
+
+- `/users` — Users list (protected)  
+  File: app/users/page.jsx  
+  Protected admin-style view listing users.
+
+Notes:
+
+- Route protection is implemented with components/auth/ProtectedRoute.jsx and AuthContext (contexts/AuthContext.jsx).
+- API calls and auth header handling live in services/api.js (Axios instance and interceptors).
+- UI components are in components/, pages/layouts in app/.
+
+## Project structure
+
+- app/ — Next.js routes and layouts
+- components/ — Reusable UI and feature components
+- services/ — API layer (services/api.js)
+- contexts/ — React contexts (AuthProvider)
+- public/ — Static assets
+
+## Environment
+
+- NEXT_PUBLIC_API_BASE_URL — base URL for the backend API
+
+## Contribution & Customization
+
+- Edit UI routes in app/, components in components/.
+- Extend API calls in services/api.js.
+- Authentication state is managed by contexts/AuthContext.jsx and provided in app/layout.js.
 
 ## License
 
-This project is intended for assessment and demonstration purposes.
-
----
+For assessment and demonstration purposes.
